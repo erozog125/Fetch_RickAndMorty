@@ -1,5 +1,6 @@
 const main_api = document.getElementById("main-api");
 const selected_character = document.getElementById("sel-character");
+const everybody_character = document.getElementById('everybody');
 
 // api rick and morty
 const URL = "https://rickandmortyapi.com/api/character/";
@@ -22,16 +23,15 @@ function List_Characters() {
   });
 }
 
-
-
 function Fetch_Resources() {
   const character = selected_character.value;
  fetch(URL)
   .then((response) => response.json())
   .then((data) => {
-    if( character === 'everybody') {
+    if( character === everybody_character.value) {
+      main_api.innerHTML = '';
       return data.results.map(element => {create_card(element)})}
-    else {return data.results.map(element => {if (element.name === character) {create_card(element)}
+    else {return data.results.map(element => {if (element.name === character) { main_api.innerHTML = '';create_card(element)}
       })
     }        
   })
